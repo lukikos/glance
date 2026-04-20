@@ -17,7 +17,8 @@ var (
 )
 
 func main() {
-	configPath := flag.String("config", "glance.yml", "Path to the configuration file")
+	// Default config path changed to ~/.config/glance/glance.yml for XDG compliance
+	configPath := flag.String("config", "~/.config/glance/glance.yml", "Path to the configuration file")
 	showVersion := flag.Bool("version", false, "Print version information and exit")
 	flag.Parse()
 
