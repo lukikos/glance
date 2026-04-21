@@ -38,6 +38,7 @@ func main() {
 	// so they get a clear message instead of a cryptic load error.
 	if _, statErr := os.Stat(*configPath); os.IsNotExist(statErr) {
 		log.Printf("Warning: config file not found at %s", *configPath)
+		log.Printf("Hint: create the directory with: mkdir -p %s", filepath.Dir(*configPath))
 	}
 
 	cfg, err := config.Load(*configPath)
