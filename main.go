@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/glanceapp/glance/internal/config"
 	"github.com/glanceapp/glance/internal/server"
@@ -18,7 +19,13 @@ var (
 
 func main() {
 	// Default config path changed to ~/.config/glance/glance.yml for XDG compliance
-	configPath := flag.String("config", "~/.config/glance/glance.yml", "Path to the configuration file")
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		homeDir = "."
+	}
+	defaultConfigPath := filepath.Join(homeDir, ".config", "glance", "glance.yml")
+
+	configPath := flag.String("config", defaultConfigPath, "Path to the configuration file")
 	showVersion := flag.Bool("version", false, "Print version information and exit")
 	flag.Parse()
 
