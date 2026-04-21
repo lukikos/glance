@@ -34,6 +34,12 @@ func main() {
 		os.Exit(0)
 	}
 
+	// Warn the user if the config file doesn't exist at the resolved path,
+	// so they get a clear message instead of a cryptic load error.
+	if _, statErr := os.Stat(*configPath); os.IsNotExist(statErr) {
+		log.Printf("Warning: config file not found at %s", *configPath)
+	}
+
 	cfg, err := config.Load(*configPath)
 	if err != nil {
 		log.Fatalf("Failed to load configuration: %v", err)
