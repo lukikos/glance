@@ -39,6 +39,10 @@ func main() {
 	if _, statErr := os.Stat(*configPath); os.IsNotExist(statErr) {
 		log.Printf("Warning: config file not found at %s", *configPath)
 		log.Printf("Hint: create the directory with: mkdir -p %s", filepath.Dir(*configPath))
+		// Also print an example copy command if the user has a local glance.yml nearby
+		if _, localErr := os.Stat("glance.yml"); localErr == nil {
+			log.Printf("Hint: a local glance.yml was found; copy it with: cp glance.yml %s", *configPath)
+		}
 	}
 
 	cfg, err := config.Load(*configPath)
