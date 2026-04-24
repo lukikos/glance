@@ -56,7 +56,12 @@ func main() {
 		log.Fatalf("Failed to initialize server: %v", err)
 	}
 
-	log.Printf("Starting glance %s on %s:%d", Version, cfg.Server.Host, cfg.Server.Port)
+	// Log the full address as a clickable URL for convenience
+	host := cfg.Server.Host
+	if host == "" || host == "0.0.0.0" {
+		host = "localhost"
+	}
+	log.Printf("Starting glance %s — open at http://%s:%d", Version, host, cfg.Server.Port)
 
 	if err := srv.Start(); err != nil {
 		log.Fatalf("Server error: %v", err)
