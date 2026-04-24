@@ -56,10 +56,12 @@ func main() {
 		log.Fatalf("Failed to initialize server: %v", err)
 	}
 
-	// Log the full address as a clickable URL for convenience
+	// Log the full address as a clickable URL for convenience.
+	// Use 127.0.0.1 instead of localhost to avoid IPv6 resolution delays on
+	// some systems where 'localhost' resolves to ::1 first.
 	host := cfg.Server.Host
 	if host == "" || host == "0.0.0.0" {
-		host = "localhost"
+		host = "127.0.0.1"
 	}
 	log.Printf("Starting glance %s — open at http://%s:%d", Version, host, cfg.Server.Port)
 
