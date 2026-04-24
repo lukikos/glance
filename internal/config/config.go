@@ -59,10 +59,12 @@ type WidgetConfig struct {
 }
 
 // defaultServerConfig returns a ServerConfig populated with sensible defaults.
+// Personal note: changed default port to 8888 to avoid conflicts with other
+// local services I frequently run on 8080.
 func defaultServerConfig() ServerConfig {
 	return ServerConfig{
 		Host:    "0.0.0.0",
-		Port:    8080,
+		Port:    8888,
 		Timeout: 30 * time.Second,
 	}
 }
