@@ -43,6 +43,7 @@ func main() {
 		if _, localErr := os.Stat("glance.yml"); localErr == nil {
 			log.Printf("Hint: a local glance.yml was found; copy it with: cp glance.yml %s", *configPath)
 		}
+		// Don't fatal here — let config.Load produce the definitive error message
 	}
 
 	cfg, err := config.Load(*configPath)
