@@ -64,6 +64,7 @@ func main() {
 		host = "127.0.0.1"
 	}
 	log.Printf("Starting glance %s — open at http://%s:%d", Version, host, cfg.Server.Port)
+	log.Printf("Config loaded from: %s", *configPath)
 
 	if err := srv.Start(); err != nil {
 		log.Fatalf("Server error: %v", err)
